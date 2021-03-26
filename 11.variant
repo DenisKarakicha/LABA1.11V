@@ -1,0 +1,140 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+struct Date
+{
+    short day;
+    short month;
+    short year;
+    bool iscorrect();
+};
+
+bool Date::iscorrect()
+{
+    bool iscorrect = true;
+    if (day > 31 || month > 12)
+    {
+        iscorrect = false;
+        cout << "Invalid value!!!!!!!!!!!!!!!!!!!!!!"<<endl;
+    }
+    return iscorrect;
+}
+
+struct Warehouse
+{
+    char nameproduct[500];
+    Date dateofmanufacture;
+    int shelflife;
+    int price;
+    int numberofseries;
+    void productinfo();
+    void readinfo();
+    //void live();
+    
+};
+
+
+
+void live( int day , int month , int year, int shelflife)
+{
+    int newyear, newmonth, newday;
+    const float DAYINTEAR = 365.25;
+    float day1 = 365.25 * year + 30.4375 * (month - 1.) + day + shelflife;
+    newyear = day1 / 365.25;
+    day1 = day1 - newyear * 365.25;
+    newmonth = day1 / (365.25 / 12) ;
+    newday = day1 - (newmonth * 365.25 / 12);
+    cout << "Sell by: "<< newday << " " << newmonth + 1 << " " << newyear<< endl;
+    
+    
+    
+    /*int newdate = 0*/
+    /*month = month * 30;
+    if (month >= 360)
+        year++; 
+    newdate = day + shelflife+ month;
+    if (month >= 360)
+    {
+        if (month == 360)
+        {
+            month++;
+            month = month % 10;
+        }
+ 
+    }
+    else
+    {
+        month = newdate / 30;
+    }
+    day = newdate % 30;
+
+    cout << "DieDay:" << day <<" "<< month <<" " << year;*/
+
+    /*allday = month * 30 + day + year*365 + shelflife;
+    year = allday / 365;
+    month =*/ 
+    
+    
+
+
+}
+
+void Warehouse::productinfo()
+{
+    cout << endl << "Products" << endl;
+    cout << "nameproduct: " << nameproduct << endl;
+    live(dateofmanufacture.day, dateofmanufacture.month, dateofmanufacture.year, shelflife);
+
+}
+
+void Warehouse::readinfo()
+{
+    cout << "Input nameproduct: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(nameproduct, sizeof(nameproduct));
+
+    do
+    {
+        cout << "Input dateofmanufacture: ";
+
+        cin >> dateofmanufacture.day >> dateofmanufacture.month >> dateofmanufacture.year;
+    } while (!dateofmanufacture.iscorrect());
+
+    cout << "Input shelflife: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> shelflife;
+
+    cout << "Input praice: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> price;
+
+    cout << "Input numberofseries: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin >> numberofseries;
+}
+
+void task11()
+{
+
+    const int N = 2;
+    Warehouse product[N];
+    for (size_t i = 0; i < N; i++)
+    {
+        product[i].readinfo();
+        cout << endl;
+        product[i].productinfo();
+        cout << endl;
+    }
+
+
+
+
+}
+
+int main()
+{
+    cout << "Input your produkt" << endl;
+    task11();
+
+}
